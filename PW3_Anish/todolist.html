@@ -1,0 +1,106 @@
+<!-- CS 6314.003 -->
+<!-- Practice Work - 3 -->
+<!-- Author: Anish Joshi (AXJ200101) -->
+<!DOCTYPE html>
+<html>
+<head><title>TODO List </title> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<style>
+.done
+{
+  text-decoration: line-through;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-sm bg-light">
+      <h3>Todo List</h3>
+      <input type="text" id="newelement">
+      <button id="add" onclick="addnewElement()">Add Item</button>
+      <hr />
+      <ul id="ul1">
+          <li>Post grades <i class="bi bi-eraser-fill"></i></li>
+          <li>TA meeting <i class="bi bi-eraser-fill"></i></li>
+      </ul>
+
+    </div>
+    <div class="col-sm"></div>
+    <div class="col-sm"></div>
+  </div>
+</div>
+<script>
+    var listitems=document.querySelector('ul');
+    listitems.addEventListener('click',function(ev)
+    {
+      if(ev.target.tagName="LI")
+      {
+        ev.target.classList.toggle('done');
+      }
+    }, false);
+    var node_list=document.getElementsByTagName('LI')
+    for(var i=0;i<node_list.length;i++)
+    {
+      var spn=document.createElement('SPAN');
+      var in_txt=document.createTextNode('\u00D7');
+      spn.className="close";
+      spn.appendChild(in_txt);
+      node_list[i].appendChild(spn);
+    }
+    var remove_item=document.getElementsByClassName("close");
+    for(var i=0;i<remove_item.length;i++)
+    {
+      remove_item[i].onclick=function()
+      {
+        var div_element=this.parentElement;
+        div_element.style.display="none";
+      }
+    }
+    function addnewElement()
+    {
+      var nd=document.createElement("li");
+      var input_value=document.getElementById("newelement").value;
+      var text_node=document.createTextNode(input_value);
+      nd.appendChild(text_node);
+      if(input_value==='')
+      {
+        alert("Enter something");
+      }
+      else
+      {
+        document.getElementById("ul1").appendChild(nd);
+        var btn=document.createElement("i");
+        btn.innerHTML="<i class=\"bi bi-eraser-fill\"></i>";
+        nd.appendChild(btn);
+        nd.setAttribute("id",input_value);
+      }
+      document.getElementById("newelement").value="";
+      var span_element = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span_element.className = "close";
+      span_element.appendChild(txt);
+      nd.appendChild(span_element);
+
+      for (var i = 0; i < remove_item.length; i++) 
+      {
+      remove_item[i].onclick = function() 
+      {
+      var div = this.parentElement;
+      div.style.display = "none";
+      }
+      }
+    }
+    newelement.onkeypress=function(e)
+    {
+      if(e.which==13)
+      {
+        addnewElement();
+      }
+    }
+
+</script>
+</body>
+</html>
